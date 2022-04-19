@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cff5128a4d6654eab56a03d104f608, type: 3}
   m_Name: Bag
   m_EditorClassIdentifier: 
-  Width: 2
-  Height: 2
+  size:
+    x: 2
+    y: 2
   rotate: 0
   sprite: {fileID: 21300000, guid: 93dbc8f96dc6c00418ba8f1a8e8992e4, type: 3}

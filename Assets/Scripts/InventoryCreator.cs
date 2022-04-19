@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Inventory : MonoBehaviour
+namespace Oxygenist
 {
-    public GameObject cellPrefab;
-
-    private void Awake()
+    public partial class Inventory : MonoBehaviour
     {
-        Initialize();
-        GenerateInventoryCell();
-    }
+        public GameObject cellPrefab;
 
-    private void GenerateInventoryCell()
-    {
-        for (int y = 0; y < Height; y++)
+        private void Awake()
         {
-            for (int x = 0; x < Width; x++)
+            Initialize();
+            GenerateInventoryCell();
+        }
+
+        private void GenerateInventoryCell()
+        {
+            for (int y = 0; y < Height; y++)
             {
-                var obj = Instantiate(cellPrefab, transform);
-                var cell = obj.GetComponent<InventoryCell>();
-                Grid[x, y] = cell;
-                cell.Initialize(this, x, y);
+                for (int x = 0; x < Width; x++)
+                {
+                    var obj = Instantiate(cellPrefab, transform);
+                    var cell = obj.GetComponent<InventoryCell>();
+                    grid[x, y] = cell;
+                    cell.Initialize(this, x, y);
+                }
             }
         }
     }

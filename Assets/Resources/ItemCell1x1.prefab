@@ -89,7 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63d01d2f506cc14a9f0c8b700572c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseImage: {fileID: 5640996148948494792}
+  _backgroundImage: {fileID: 8280238141824476816}
+  _iconImage: {fileID: 5640996148948494792}
 --- !u!1 &8017483514917583492
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

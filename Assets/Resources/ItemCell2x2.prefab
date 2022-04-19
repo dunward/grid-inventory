@@ -89,7 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63d01d2f506cc14a9f0c8b700572c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseImage: {fileID: 8957004710756443193}
+  _backgroundImage: {fileID: 8280238141824476816}
+  _iconImage: {fileID: 8957004710756443193}
 --- !u!1 &4645501375535070978
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +102,6 @@ GameObject:
   - component: {fileID: 2463246169574959525}
   - component: {fileID: 2464937974426738796}
   - component: {fileID: 8957004710756443193}
-  - component: {fileID: 6210963456732937197}
   m_Layer: 5
   m_Name: Base
   m_TagString: Untagged
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -166,24 +166,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!223 &6210963456732937197
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4645501375535070978}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
-  m_TargetDisplay: 0

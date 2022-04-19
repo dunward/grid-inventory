@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cff5128a4d6654eab56a03d104f608, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  Width: 1
-  Height: 1
+  size:
+    x: 1
+    y: 1
   rotate: 0
   sprite: {fileID: 21300000, guid: 1a58749f555f75e48baa41893215b26e, type: 3}

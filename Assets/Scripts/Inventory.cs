@@ -5,119 +5,164 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-public partial class Inventory : MonoBehaviour
+namespace Oxygenist
 {
-    public Size size;
-    // public int width;
-    // public int height;
-
-    private InventoryCell[,] _grid;
-
-    public InventoryCell[,] Grid
+    public partial class Inventory : MonoBehaviour
     {
-        get => _grid;
-        set
+        public Coord2 size;
+        // public int width;
+        // public int height;
+
+        private InventoryCell[,] _grid;
+
+        public InventoryCell[,] grid
         {
-            _grid = value;
-            OnGridChanged();
-        }
-    }
-
-    public int Width
-    {
-        get => size.x;
-    }
-
-    public int Height
-    {
-        get => size.y;
-    }
-
-    private int[,] _validGrid; // 0 = Valid
-
-    public void Initialize()
-    {
-        Grid = new InventoryCell[Width, Height];
-        _validGrid = new int[Width, Height];
-    }
-
-    public void AddItem(Item item)
-    {
-        var pos = GetItemInventoryPosition(item);
-
-        if (pos != null)
-        {
-            Grid[pos.x, pos.y].AddItem(item);
-            UpdateValidGrid(pos, item);
-        }
-        else
-        {
-            Debug.LogError("Inventory is full");
-        }
-    }
-
-    public Size GetItemInventoryPosition(Item item)
-    {
-        for (int y = 0; y < Height - (item.Height - 1); y++)
-        {
-            for (int x = 0; x < Width - (item.Width - 1); x++)
+            get => _grid;
+            set
             {
-                if (_validGrid[x, y] == 0)
+                _grid = value;
+                OnGridChanged();
+            }
+        }
+
+        public int Width
+        {
+            get => size.x;
+        }
+
+        public int Height
+        {
+            get => size.y;
+        }
+
+        private bool[,] inValidGrid; // 0 = Valid
+
+        public void Initialize()
+        {
+            // this.width = width;
+            // this.height = height;
+
+            grid = new InventoryCell[Width, Height];
+            inValidGrid = new bool[Width, Height];
+            // var validGrid = new int[width][];
+            // for (int i = 0; i < width; i++)
+            // {
+            //     validGrid[i] = new int[height];
+            // }
+
+            // this.validGrid = validGrid;
+            // ShowValidGrid();
+        }
+
+        public void AddItem(Item item)
+        {
+            var pos = GetItemInventoryPosition(item);
+
+            if (pos != null) // find C# 7.0 pattern
+            {
+                grid[pos.x, pos.y].AddItem(item); // valid grid update here
+                UpdateValidGrid(pos, item.size, true);
+            }
+            else
+            {
+                Debug.LogError("Inventory is full");
+            }
+
+            // ShowValidGrid();
+        }
+
+        public Coord2 GetItemInventoryPosition(Item item)
+        {
+            // !! SHOULD OPTIMIZE : so slow --
+            for (int y = 0; y < Height - (item.Height - 1); y++)
+            {
+                for (int x = 0; x < Width - (item.Width - 1); x++)
                 {
-                    if (CheckItemSize(item, x, y))
+                    if (!inValidGrid[x, y])
                     {
-                        return new Size(x, y);
+                        if (CheckItemSize(inValidGrid, item.size, x, y)) // O(N^2 * nlogn)
+                        {
+                            return new Coord2(x, y);
+                        }
                     }
                 }
             }
+
+            return null; // inventory is full
         }
 
-        return null; // inventory is full
-    }
-
-    private bool CheckItemSize(Item item, int x, int y)
-    {
-        var (maxX, maxY) = (x + item.Width, y + item.Height);
-
-        for (int _y = y; _y < maxY; _y++)
+        public bool MoveItem(Coord2 position, Coord2 newPosition, Coord2 itemSize)
         {
-            for (int _x = x; _x < maxX; _x++)
+            // Create Temp Grid
+            var temp = inValidGrid;
+            UpdateValidGrid(temp, position, itemSize, false);
+
+            if (CheckItemSize(temp, itemSize, newPosition.x, newPosition.y))
             {
-                if (_validGrid[_x, _y] != 0) return false;
+                UpdateValidGrid(position, itemSize, false);
+                UpdateValidGrid(newPosition, itemSize, true);
+
+                return true;
             }
+
+            return false;
         }
 
-        return true;
-    }
+        private bool CheckItemSize(bool[,] grid, Coord2 size, int x, int y)
+        {
+            var (maxX, maxY) = (x + size.x, y + size.y);
 
-    private void OnGridChanged()
-    {
+            if (maxX > Width || maxY > Height) return false;
+
+            for (int _y = y; _y < maxY; _y++)
+            {
+                for (int _x = x; _x < maxX; _x++)
+                {
+                    if (grid[_x, _y]) return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void OnGridChanged() // deprecate
+        {
+            
+        }
         
-    }
-
-    private void UpdateValidGrid(Size position, Item item)
-    {
-        var (maxX, maxY) = (position.x + item.Width, position.y + item.Height);
-        for (int y = position.y; y < maxY; y++)
+        private void UpdateValidGrid(Coord2 position, Coord2 size, bool flag)
         {
-            for (int x = position.x; x < maxX; x++)
-            {
-                _validGrid[x, y] = 1;
-            }
+            UpdateValidGrid(inValidGrid, position, size, flag);
         }
-    }
+
+        private void UpdateValidGrid(bool[,] grid, Coord2 position, Coord2 size, bool flag)
+        {
+            var (maxX, maxY) = (position.x + size.x, position.y + size.y);
+            for (int y = position.y; y < maxY; y++)
+            {
+                for (int x = position.x; x < maxX; x++)
+                {
+                    grid[x, y] = flag;
+                }
+            }
+
+            ShowValidGrid(); // test mode
+        }
 
 #if UNITY_EDITOR
-    public void ShowValidGrid()
-    {
-        for (int y = 0; y < Height; y++)
+        public void ShowValidGrid()
         {
-            for (int x = 0; x < Width; x++)
+            for (int y = 0; y < Height; y++)
             {
-                if (_validGrid[x, y] != 0)
-                    Grid[x, y].GetComponent<Image>().color = Color.red;
+                for (int x = 0; x < Width; x++)
+                {
+                    if (inValidGrid[x, y])
+                        grid[x, y].GetComponent<Image>().color = Color.red;
+                    else
+                        grid[x, y].GetComponent<Image>().color = Color.white;
+                }
             }
         }
-    }
 #endif
+    }
 }

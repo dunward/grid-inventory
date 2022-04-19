@@ -2,31 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Create New Item")]
-public class Item : ScriptableObject
+namespace Oxygenist
 {
-    public int Width;
-    public int Height;
-    // public int Width
-    // {
-    //     get;
-    //     private set;
-    // }
+    [CreateAssetMenu(menuName = "Create New Item")]
+    public class Item : ScriptableObject
+    {
+        public Coord2 size;
+        
+        public int Width
+        {
+            get => size.x;
+        }
+        public int Height
+        {
+            get => size.y;
+        }
 
-    // public int Height
-    // {
-    //     get;
-    //     private set;
-    // }
-
-    public ItemRotate rotate;
-    public Sprite sprite;
-
-    // public Item(int width, int height)
-    // {
-    //     Width = width;
-    //     Height = height;
-
-    //     rotate = ItemRotate.Portrait;
-    // }
+        public ItemRotate rotate;
+        public Sprite sprite;
+    }
 }
