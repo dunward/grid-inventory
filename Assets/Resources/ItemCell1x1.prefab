@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6307934401233043941}
   - component: {fileID: 8280238141824476816}
   - component: {fileID: 6352219875610344989}
+  - component: {fileID: -4662368691847608812}
   m_Layer: 5
   m_Name: ItemCell1x1
   m_TagString: Untagged
@@ -91,6 +92,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backgroundImage: {fileID: 8280238141824476816}
   _iconImage: {fileID: 5640996148948494792}
+--- !u!225 &-4662368691847608812
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469812328245248789}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8017483514917583492
 GameObject:
   m_ObjectHideFlags: 0

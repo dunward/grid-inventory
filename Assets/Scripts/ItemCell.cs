@@ -12,11 +12,13 @@ namespace Oxygenist
         private Image _backgroundImage;
         [SerializeField]
         private Image _iconImage;
+        private GameObject dragObject;
 
         private InventoryCell _inventoryCell;
         private Coord2 _position;
         private Item _item;
 
+        
         public void Initialize(Item item, Coord2 position, InventoryCell inventoryCell)
         {
             _iconImage.sprite = item.sprite;
@@ -31,11 +33,13 @@ namespace Oxygenist
         public void OnBeginDrag(PointerEventData eventData)
         {
             _backgroundImage.raycastTarget = false;
+
+            dragObject = CreateShadowItem();
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            transform.position += (Vector3)eventData.delta;
+            dragObject.transform.position += (Vector3)eventData.delta;
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -51,6 +55,15 @@ namespace Oxygenist
             }
 
             ResetPosition();
+            Destroy(dragObject);
+        }
+
+        private GameObject CreateShadowItem()
+        {
+            var obj = Instantiate(gameObject, transform.parent);
+            obj.GetComponent<CanvasGroup>().alpha = 0.5f;
+
+            return obj;
         }
 
         private void UpdateCellPosition(InventoryCell cell)
