@@ -105,6 +105,8 @@ namespace Oxygenist
                 return true;
             }
 
+            UpdateValidGrid(position, itemSize, true);
+
             return false;
         }
 
