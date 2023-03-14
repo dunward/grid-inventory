@@ -32,9 +32,8 @@ namespace Oxygenist
 
         public bool MoveItem(Item item, Coord2 prevPosition)
         {
-            var z= _inventory.MoveItem(prevPosition, inventoryPosition, item.size);
-            Debug.LogError(z);
-            return z;
+            var isMove = _inventory.MoveItem(prevPosition, inventoryPosition, item.size);
+            return isMove;
         }
     }
 }

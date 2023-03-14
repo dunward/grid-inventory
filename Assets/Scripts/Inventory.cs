@@ -9,6 +9,9 @@ namespace Oxygenist
 {
     public partial class Inventory : MonoBehaviour
     {
+        [SerializeField]
+        private bool debugMode;
+
         public Coord2 size;
         // public int width;
         // public int height;
@@ -154,6 +157,8 @@ namespace Oxygenist
 #if UNITY_EDITOR
         public void ShowValidGrid()
         {
+            if (!debugMode) return;
+            
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
