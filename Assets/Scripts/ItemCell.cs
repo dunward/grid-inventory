@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ namespace Oxygenist
         private Image _backgroundImage;
         [SerializeField]
         private Image _iconImage;
+        [SerializeField]
+        private TextMeshProUGUI _itemNameText;
         private GameObject dragObject;
 
         private InventoryCell _inventoryCell;
@@ -22,6 +25,7 @@ namespace Oxygenist
         public void Initialize(Item item, Coord2 position, InventoryCell inventoryCell)
         {
             _iconImage.sprite = item.sprite;
+            _itemNameText.text = item.itemName;
             _position = position;
 
             _inventoryCell = inventoryCell;

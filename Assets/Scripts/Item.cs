@@ -7,6 +7,7 @@ namespace Oxygenist
     [CreateAssetMenu(menuName = "Create New Item")]
     public class Item : ScriptableObject
     {
+        public string itemName;
         public Coord2 size;
         
         public int Width
