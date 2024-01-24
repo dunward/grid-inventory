@@ -19,7 +19,7 @@ namespace Oxygenist
 
             inventoryPosition = new Coord2(x, y);
 
-            _rectTransform.anchoredPosition = new Vector2(100 * x, 100 * -y);
+            _rectTransform.anchoredPosition = new Vector2(CargoUtility.GRID_UNIT_SIZE * x, CargoUtility.GRID_UNIT_SIZE * -y);
         }
 
         public void AddItem(Item item)
