@@ -1,4 +1,7 @@
-public class DepotUtility
+namespace Oxygenist
 {
-    public static int GRID_UNIT_SIZE = 65;
+    public class DepotUtility
+    {
+        public static int GRID_UNIT_SIZE = 65;
+    }
 }
