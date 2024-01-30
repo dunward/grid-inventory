@@ -1,4 +1,4 @@
-public class CargoUtility
+public class DepotUtility
 {
     public static int GRID_UNIT_SIZE = 65;
 }
