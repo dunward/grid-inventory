@@ -33,6 +33,9 @@ namespace Oxygenist
 
         public void OnDrag(PointerEventData eventData)
         {
+            var calcPosition = eventData.position - eventData.pressPosition;
+            calcPosition = calcPosition /= 2;
+            dragTransform.anchoredPosition = calcPosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
