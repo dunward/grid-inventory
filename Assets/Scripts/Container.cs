@@ -30,7 +30,6 @@ namespace Oxygenist
                 {
                     var grid = Instantiate(gridObject, gridAreaTransform);
                     grid.GetComponent<RectTransform>().anchoredPosition = new Vector3(x * DepotUtility.GRID_UNIT_SIZE, -y * DepotUtility.GRID_UNIT_SIZE, 0);
-                    Debug.LogError($"Grid {x * DepotUtility.GRID_UNIT_SIZE} {y * DepotUtility.GRID_UNIT_SIZE} created!");
                 }
             }
         }
