@@ -6,6 +6,13 @@ namespace Oxygenist
 {
     public class Container : MonoBehaviour
     {
+        private Depot depot;
+
+        private Canvas canvas;
+        public Canvas Canvas
+        {
+            get => canvas;
+        }
         private RectTransform rectTransform;
 
         [SerializeField]
@@ -13,10 +20,15 @@ namespace Oxygenist
 
         public Coord2 GridSize;
 
-        public void Initialize()
-        {
-            rectTransform = GetComponent<RectTransform>();
+        [SerializeField]
+        private List<Item> items = new List<Item>();
 
+        public void Initialize(Depot depot)
+        {
+            this.depot = depot;
+
+            canvas = GetComponentInParent<Canvas>();
+            rectTransform = GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(GridSize.x * DepotUtility.GRID_UNIT_SIZE, GridSize.y * DepotUtility.GRID_UNIT_SIZE);
             CreateGrid();
         }
@@ -29,7 +41,8 @@ namespace Oxygenist
                 for (int y = 0; y < GridSize.y; y++)
                 {
                     var grid = Instantiate(gridObject, gridAreaTransform);
-                    grid.GetComponent<RectTransform>().anchoredPosition = new Vector3(x * DepotUtility.GRID_UNIT_SIZE, -y * DepotUtility.GRID_UNIT_SIZE, 0);
+                    var gridComponent = grid.GetComponent<Grid>();
+                    gridComponent.Initialize(new Coord2(x, y));
                 }
             }
         }

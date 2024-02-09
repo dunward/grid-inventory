@@ -13,7 +13,7 @@ namespace Oxygenist
         {
             foreach (var container in containers)
             {
-                container.Initialize();
+                container.Initialize(this);
             }
         }
     }
