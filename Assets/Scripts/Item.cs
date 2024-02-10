@@ -20,6 +20,11 @@ namespace Oxygenist
         private Coord2 position;
         
         private RectTransform dragTransform;
+
+        public void Initialize(Container container)
+        {
+            this.container = container;
+        }
         
         public void UpdatePosition(Coord2 position)
         {
@@ -33,14 +38,12 @@ namespace Oxygenist
 
         public void OnDrag(PointerEventData eventData)
         {
-            var calcPosition = eventData.position - eventData.pressPosition;
-            calcPosition = calcPosition /= 2;
-            dragTransform.anchoredPosition = calcPosition;
+            dragTransform.anchoredPosition += eventData.delta / MainCanvas.Instance.GetCanvas().scaleFactor;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Destroy(dragTransform.gameObject);
+            // Destroy(dragTransform.gameObject);
         }
 
         private RectTransform CreateShadowItem()
