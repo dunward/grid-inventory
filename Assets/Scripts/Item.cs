@@ -38,7 +38,7 @@ namespace Oxygenist
 
         public void OnDrag(PointerEventData eventData)
         {
-            dragTransform.anchoredPosition += eventData.delta / MainCanvas.Instance.GetCanvas().scaleFactor;
+            dragTransform.anchoredPosition += eventData.delta / InventoryCanvas.Instance.GetCanvas().scaleFactor;
         }
 
         public void OnEndDrag(PointerEventData eventData)
