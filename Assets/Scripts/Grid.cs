@@ -10,6 +10,11 @@ namespace Oxygenist
 
         [SerializeField]
         private Coord2 position;
+        public Coord2 Position
+        {
+            get => position;
+        }
+        
         private RectTransform rectTransform;
 
         public void Initialize(Container container, Coord2 position)

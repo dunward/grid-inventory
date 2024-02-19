@@ -42,6 +42,24 @@ namespace Oxygenist
             UpdateGridAvailability();
         }
 
+        public bool IsAvailable(Coord2 position, Coord2 size)
+        {
+            var maxX = position.x + size.x;
+            var maxY = position.y + size.y;
+
+            for (int x = position.x; x < maxX; x++)
+            {
+                for (int y = position.y; y < maxY; y++)
+                {
+                    if (!gridAvailability[x, y])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void CreateGrid()
         {
             var gridObject = Resources.Load<GameObject>("Grid");

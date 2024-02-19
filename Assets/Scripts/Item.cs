@@ -42,6 +42,7 @@ namespace Oxygenist
         public void OnBeginDrag(PointerEventData eventData)
         {
             dragTransform = CreateShadowItem();
+            dragTransform.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -51,7 +52,23 @@ namespace Oxygenist
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            // Destroy(dragTransform.gameObject);
+            if (eventData.pointerCurrentRaycast.gameObject != null)
+            {
+                if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent<Grid>(out var grid))
+                {
+                    var gridPosition = grid.Position;
+                    if (container.IsAvailable(gridPosition, size))
+                    {
+                        // container.MoveItem(this, gridPosition);
+                        rectTransform.anchoredPosition = new Vector2(gridPosition.x * DepotUtility.GRID_UNIT_SIZE, -gridPosition.y * DepotUtility.GRID_UNIT_SIZE);
+                    }
+                    else
+                    {
+                        rectTransform.anchoredPosition = new Vector2(position.x * DepotUtility.GRID_UNIT_SIZE, position.y * DepotUtility.GRID_UNIT_SIZE);
+                    }
+                }
+            }
+            Destroy(dragTransform.gameObject);
         }
 
         private RectTransform CreateShadowItem()
