@@ -51,7 +51,7 @@ namespace Oxygenist
                 {
                     var grid = Instantiate(gridObject, gridAreaTransform);
                     var gridComponent = grid.GetComponent<Grid>();
-                    gridComponent.Initialize(new Coord2(x, y));
+                    gridComponent.Initialize(this, new Coord2(x, y));
                 }
             }
         }
