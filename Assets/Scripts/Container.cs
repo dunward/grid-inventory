@@ -62,6 +62,11 @@ namespace Oxygenist
             return true;
         }
 
+        public void MoveItem()
+        {
+            UpdateGridAvailability();
+        }
+
         private void CreateGrid()
         {
             var gridObject = Resources.Load<GameObject>("Grid");
@@ -94,8 +99,6 @@ namespace Oxygenist
                 }
             }
 
-            Debug.LogError(items.Values.Count);
-
             foreach (var item in items.Values)
             {
                 for (int x = 0; x < item.Size.x; x++)
@@ -114,7 +117,6 @@ namespace Oxygenist
             foreach (var item in testItems)
             {
                 items[item.GetInstanceID()] = item;
-                Debug.LogError(item.GetInstanceID() + " added");
             }
         }
 

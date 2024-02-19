@@ -52,6 +52,7 @@ namespace Oxygenist
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            Debug.LogError(eventData.pointerCurrentRaycast.gameObject, eventData.pointerCurrentRaycast.gameObject);
             if (eventData.pointerCurrentRaycast.gameObject != null)
             {
                 if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent<Grid>(out var grid))
@@ -61,11 +62,14 @@ namespace Oxygenist
                     {
                         // container.MoveItem(this, gridPosition);
                         rectTransform.anchoredPosition = new Vector2(gridPosition.x * DepotUtility.GRID_UNIT_SIZE, -gridPosition.y * DepotUtility.GRID_UNIT_SIZE);
+                        position = gridPosition;
+                        container.MoveItem();
                     }
                     else
                     {
-                        rectTransform.anchoredPosition = new Vector2(position.x * DepotUtility.GRID_UNIT_SIZE, position.y * DepotUtility.GRID_UNIT_SIZE);
+                        rectTransform.anchoredPosition = new Vector2(position.x * DepotUtility.GRID_UNIT_SIZE, -position.y * DepotUtility.GRID_UNIT_SIZE);
                     }
+                    Debug.LogError("this is that grid", grid.gameObject);
                 }
             }
             Destroy(dragTransform.gameObject);
