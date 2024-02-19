@@ -5,14 +5,16 @@ using UnityEngine;
 public class InventoryCanvas : MonoBehaviour
 {
     public static InventoryCanvas Instance { get; private set; }
+    private Canvas canvas;
 
     private void Awake()
     {
         Instance = this;
+        canvas = GetComponent<Canvas>();
     }
 
-    public Canvas GetCanvas()
+    public float ScaleFactor
     {
-        return GetComponent<Canvas>();
+        get => canvas.scaleFactor;
     }
 }
