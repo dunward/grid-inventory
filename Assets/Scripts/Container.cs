@@ -24,12 +24,14 @@ namespace Oxygenist
         public Coord2 GridSize;
 
         [SerializeField]
-        private List<Item> items = new List<Item>();
+        private List<Item> testItems = new List<Item>();
+        private Dictionary<int, Item> items = new Dictionary<int, Item>();
 
         private bool[,] gridAvailability;
 
         public void Initialize(Depot depot)
         {
+            TestItems();
             this.depot = depot;
 
             canvas = GetComponentInParent<Canvas>();
@@ -76,7 +78,7 @@ namespace Oxygenist
 
         private void InitializeItems()
         {
-            foreach (var item in items)
+            foreach (var item in items.Values)
             {
                 item.Initialize(this);
             }
@@ -92,7 +94,9 @@ namespace Oxygenist
                 }
             }
 
-            foreach (var item in items)
+            Debug.LogError(items.Values.Count);
+
+            foreach (var item in items.Values)
             {
                 for (int x = 0; x < item.Size.x; x++)
                 {
@@ -103,6 +107,15 @@ namespace Oxygenist
                 }
             }
             DebugGridAvailability();
+        }
+
+        private void TestItems()
+        {
+            foreach (var item in testItems)
+            {
+                items[item.GetInstanceID()] = item;
+                Debug.LogError(item.GetInstanceID() + " added");
+            }
         }
 
         private void DebugGridAvailability()
