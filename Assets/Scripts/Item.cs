@@ -26,10 +26,13 @@ namespace Oxygenist
         private RectTransform rectTransform;
         private RectTransform dragTransform;
 
+        private float scaleFactor = 0f;
+
         public void Initialize(Container container)
         {
             this.container = container;
             rectTransform.anchoredPosition = new Vector2(position.x * DepotUtility.GRID_UNIT_SIZE, position.y * DepotUtility.GRID_UNIT_SIZE);
+            scaleFactor = InventoryCanvas.Instance.GetCanvas().scaleFactor;
         }
         
         public void UpdatePosition(Coord2 position)
@@ -44,7 +47,7 @@ namespace Oxygenist
 
         public void OnDrag(PointerEventData eventData)
         {
-            dragTransform.anchoredPosition += eventData.delta / InventoryCanvas.Instance.GetCanvas().scaleFactor;
+            dragTransform.anchoredPosition += eventData.delta / scaleFactor;
         }
 
         public void OnEndDrag(PointerEventData eventData)
