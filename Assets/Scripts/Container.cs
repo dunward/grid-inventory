@@ -30,7 +30,9 @@ namespace Oxygenist
             canvas = GetComponentInParent<Canvas>();
             rectTransform = GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(GridSize.x * DepotUtility.GRID_UNIT_SIZE, GridSize.y * DepotUtility.GRID_UNIT_SIZE);
+            
             CreateGrid();
+            InitializeItems();
         }
 
         private void CreateGrid()
