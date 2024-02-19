@@ -46,5 +46,13 @@ namespace Oxygenist
                 }
             }
         }
+
+        private void InitializeItems()
+        {
+            foreach (var item in items)
+            {
+                item.Initialize(this);
+            }
+        }
     }
 }

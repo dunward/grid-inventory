@@ -18,12 +18,18 @@ namespace Oxygenist
 
         [SerializeField]
         private Coord2 position;
+        public Coord2 Position
+        {
+            get => position;
+        }
         
+        private RectTransform rectTransform;
         private RectTransform dragTransform;
 
         public void Initialize(Container container)
         {
             this.container = container;
+            rectTransform.anchoredPosition = new Vector2(position.x * DepotUtility.GRID_UNIT_SIZE, position.y * DepotUtility.GRID_UNIT_SIZE);
         }
         
         public void UpdatePosition(Coord2 position)
